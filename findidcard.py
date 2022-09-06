@@ -89,19 +89,21 @@ class findidcard:
 # Press the green button in the gutter to run the script.
 
 
-def Check_part():
+def Check_part(template_image , use_image):
 
-    template = cv2.imread('112.jpg')
-    use = cv2.imread('332.jpg')
+    template = cv2.imread(template_image)
+    use = cv2.imread(use_image)
     print(f"Confidence for :")
     conf = cv2.matchTemplate(use, template, cv2.TM_CCOEFF_NORMED).max()
     print(conf)
+    return conf
 
 
 if __name__ == '__main__':
     idfind = findidcard()
-    result = idfind.find('testimages/3.jpg')
+    result = idfind.find('testimages/222.jpg')
 
-    cv2.imwrite('312.jpg', result)
+    cv2.imwrite('222.jpg', result)
     Check_part()
+
     # idfind.showimg(result)

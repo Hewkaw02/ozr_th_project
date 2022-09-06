@@ -11,13 +11,14 @@ pytesseract.pytesseract.tesseract_cmd = 'C:\\Program Files\\Tesseract-OCR\\tesse
 x = 1280.00 / 3840.00
 # Switch_for_get_data:int = 0
 pixel_x = int(x * 3840)
-print(x, pixel_x)
+# print(x, pixel_x)
 
 
 
 
 
 def idcardocr(imgname , mode=1):
+    # Switch_for_get_data:int = 0
     print(u'เริ่มต้นการระบุตัวตน...')
     if mode == 1:
         # generate_mask(x)
@@ -199,12 +200,12 @@ def find_firstname_en(crop_gray, crop_org):
     min_val, max_val, min_loc, max_loc = cv2.minMaxLoc(res)
     # print(max_loc)
     top_left = (max_loc[0] + w - 600, max_loc[1] - int(120 * x))
-    print(top_left)
+    # print(top_left)
     bottom_right = (top_left[0] + int(1000 * x), top_left[1] + int(150 * x))
-    print(bottom_right)
+    # print(bottom_right)
     result = cv2.UMat.get(crop_org)[top_left[1] - 10:bottom_right[1], top_left[0] - 10:bottom_right[0]]
     cv2.rectangle(crop_gray, top_left, bottom_right, 255, 2)
-    showimg(result)
+    # showimg(result)
     return cv2.UMat(result)
 
 def find_lastname_en(crop_gray, crop_org):
@@ -223,15 +224,15 @@ def find_lastname_en(crop_gray, crop_org):
     # print(bottom_right)
     result = cv2.UMat.get(crop_org)[top_left[1] - 10:bottom_right[1], top_left[0] - 10:bottom_right[0]]
     cv2.rectangle(crop_gray, top_left, bottom_right, 255, 2)
-    showimg(result)
+    # showimg(result)
     return cv2.UMat(result)
 
 def find_address(crop_gray, crop_org):
         template = cv2.UMat(cv2.imread('address_mask.jpg', 0))
         w, h = cv2.UMat.get(template).shape[::-1]
 
-        showimg(template)
-        showimg(crop_gray)
+        # showimg(template)
+        # showimg(crop_gray)
         #t1 = round(time.time()*1000)
         res = cv2.matchTemplate(crop_gray, template, cv2.TM_CCOEFF_NORMED)
         #t2 = round(time.time()*1000)
@@ -255,9 +256,9 @@ def find_idnum(crop_gray, crop_org):
         # showimg(res)
         min_val, max_val, min_loc, max_loc = cv2.minMaxLoc(res)
         top_left = (max_loc[0] + w - 720, max_loc[1] + int(150*x))
-        print(top_left)
+        # print(top_left)
         bottom_right = (top_left[0] + int(1400*x), top_left[1] + int(300*x))
-        print(bottom_right)
+        # print(bottom_right)
         result = cv2.UMat.get(crop_org)[top_left[1]-10:bottom_right[1], top_left[0]-10:bottom_right[0]]
         cv2.rectangle(crop_gray, top_left, bottom_right, 255, 2)
         # showimg(crop_gray)
@@ -272,12 +273,12 @@ def find_birth (crop_gray, crop_org):
     # showimg(res)
     min_val, max_val, min_loc, max_loc = cv2.minMaxLoc(res)
     top_left = (max_loc[0] + w , max_loc[1] - int(50 * x))
-    print(top_left)
+    # print(top_left)
     bottom_right = (top_left[0] + int(1000 * x), top_left[1] + int(200 * x))
-    print(bottom_right)
+    # print(bottom_right)
     result = cv2.UMat.get(crop_org)[top_left[1] - 10:bottom_right[1], top_left[0] - 10:bottom_right[0]]
     cv2.rectangle(crop_gray, top_left, bottom_right, 255, 2)
-    showimg(result)
+    # showimg(result)
     return cv2.UMat(result)
 
 def showimg(img):
@@ -289,7 +290,7 @@ def showimg(img):
 def get_name(img):
     # cv2.imshow("method3", img)
     # cv2.waitKey()
-    print('name')
+    # print('name')
     _, _, red = cv2.split(img)  # split 会自动将UMat转换回Mat
     red = cv2.UMat(red)
     red = hist_equal(red)
@@ -426,7 +427,7 @@ def get_result_fix_length(red, fix_length, langset, custom_config=''):
                                                      lang=langset, config=custom_config)
     # print(new_r)
     # cv2.imwrite('fixlengthred.png', cv2.UMat.get(red_org)[y-10:y + h +10 , x-10:x + w + 10])
-    print(result_string)
+    # print(result_string)
     return result_string
 
 def get_result_idnum(red, langset, org_img, custom_config=''):
@@ -464,7 +465,7 @@ def get_result_idnum(red, langset, org_img, custom_config=''):
     x, y, w, h = cv2.boundingRect(big_rect_nparray)
 
     imgrect = cv2.rectangle(color_img, (x - 10, y - 20), (x + w + 500, y + h), (0, 255, 0), 2)
-    showimg(imgrect)
+    # showimg(imgrect)
 
 
     # showimg(cv2.UMat.get(org_img)[y-20:y + h + 20, x + 20:x + w +20])
@@ -564,7 +565,7 @@ def get_result_birthday(red, langset, org_img, custom_config=''):
     x, y, w, h = cv2.boundingRect(big_rect_nparray)
 
     imgrect = cv2.rectangle(color_img, (x - 10, y - 20), (x + w + 10, y + h), (0, 255, 0), 2)
-    showimg(imgrect)
+    # showimg(imgrect)
 
 
     # showimg(cv2.UMat.get(org_img)[y-20:y + h + 20, x + 20:x + w +20])
@@ -621,7 +622,7 @@ def get_result_name_length(red, langset, org_img, custom_config=''):
                                                  langset,
                                                  custom_config)
 
-    print(result_string)
+    # print(result_string)
     # cv2.imwrite('varylength.png', cv2.UMat.get(org_img)[y :y + h + 70, x - 100:x + w+100])
     # cv2.imwrite('varylengthred.png', cv2.UMat.get(red_org)[y :y + h , x - 50:x + w])
     return result_string
@@ -660,7 +661,7 @@ def get_result_lastname(red, langset, org_img, custom_config=''):
     x, y, w, h = cv2.boundingRect(big_rect_nparray)
 
     imgrect = cv2.rectangle(color_img, (x , y ), (x + w, y + h ), (0, 255, 0), 2)
-    showimg(imgrect)
+    # showimg(imgrect)
     # showimg(cv2.UMat.get(org_img)[y-20:y + h + 20, x + 20:x + w +20])
 
     result_string = ''
@@ -668,7 +669,7 @@ def get_result_lastname(red, langset, org_img, custom_config=''):
                                                  langset,
                                                  custom_config)
 
-    print(result_string)
+    # print(result_string)
     # cv2.imwrite('varylength.png', cv2.UMat.get(org_img)[y :y + h + 70, x - 100:x + w+100])
     # cv2.imwrite('varylengthred.png', cv2.UMat.get(red_org)[y :y + h , x - 50:x + w])
     return result_string
@@ -707,7 +708,7 @@ def get_result_firstname(red, langset, org_img, custom_config=''):
     x, y, w, h = cv2.boundingRect(big_rect_nparray)
 
     imgrect = cv2.rectangle(color_img, (x , y ), (x + w, y + h), (0, 255, 0), 2)
-    showimg(imgrect)
+    # showimg(imgrect)
     # showimg(cv2.UMat.get(org_img)[y-20:y + h + 20, x + 20:x + w +20])
 
     result_string = ''
@@ -715,7 +716,7 @@ def get_result_firstname(red, langset, org_img, custom_config=''):
                                                  langset,
                                                  custom_config)
 
-    print(result_string)
+    # print(result_string)
     # cv2.imwrite('varylength.png', cv2.UMat.get(imgrect)[y  :y + h +500 , x - 200:x +100 ])
     # cv2.imwrite('varylengthred.png', cv2.UMat.get(imgrect)[y :y + h , x - 50:x + w])
     return result_string
@@ -816,8 +817,8 @@ def hist_equal(img):
 
 
 if __name__ == "__main__":
-
-    image_for_use = 'testimages/112.jpg'
+    # testimages / 1012.jpg
+    image_for_use = '1012.jpg'
     idocr = idcardocr(cv2.UMat(cv2.imread(image_for_use)))
 
     # image_for_check = 'testiamges/322.jpg'
