@@ -84,12 +84,22 @@ class S(BaseHTTPRequestHandler):
 
 
         fo = open("tmp/image.jpg", "wb")
-        fo.write(multipart_data.get('pic')[0])
+
 
         if data == ['1']:
+            fo.write(multipart_data.get('pic')[0])
             result = process("tmp/image.jpg")
         elif data == ['2']:
+            fo.write(multipart_data.get('pic')[0])
             result = check_image("tmp/image.jpg")
+        elif data == ['3']:
+            print(123123123)
+        elif data == 2:
+            print(123123123)
+        elif data == '2':
+            print(123123123)
+        elif data == "2":
+            print(123123123)
         else:
             print(3)
         # filename = uuid.uuid1()
@@ -101,6 +111,7 @@ class S(BaseHTTPRequestHandler):
         # print result
         self._set_headers()
         self.send_header("Content-Length", str(len(json.dumps(result).encode('utf-8'))))
+        print(bytes("Request: %s" % self.path, "utf-8"))
         self.end_headers()
         self.wfile.write(json.dumps(result).encode('utf-8'))
 
@@ -108,6 +119,7 @@ def http_server(server_class=ForkingServer, handler_class=S, port=8080):
     server_address = ('', port)
     httpd = server_class(server_address, handler_class)
     cv2.ocl.setUseOpenCL(False)
+    print(server_address)
     print('Starting httpd...')
     print(u"Status OpenCL：%s"%cv2.ocl.useOpenCL())
     httpd.serve_forever()
